@@ -1,11 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
-import React from 'react'
-
 
 function NavBar() {
- 
-  
-
     return (
         <>
           <div className='w-full bg-green-400 text-black flex justify-center py-4'>
