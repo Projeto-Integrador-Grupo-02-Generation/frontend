@@ -12,13 +12,12 @@ function App() {
     <>
       <BrowserRouter>
         <NavBar />
-        <div className='min-h-[80vh]'>
+        <div className='flex justify-center min-h-[80vh]'>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
-            
           </Routes>
         </div>
         <Footer />
