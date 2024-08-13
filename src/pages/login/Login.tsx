@@ -12,7 +12,7 @@ function Login() {
                         name="username" 
                         placeholder="exemplo@exemplo.com.br"></input>
                         <label className='py-1' htmlFor="password">Senha</label>
-                        <input className='my-1 rounded border border-black' type="text" id="password" name="password"></input>
+                        <input className='my-1 rounded border border-black' type="password" id="password" name="password"></input>
                         <button
                             className='self-center rounded bg-green-400 text-white w-32 my-5 py-2'>
                             Entrar

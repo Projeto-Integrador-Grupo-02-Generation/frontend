@@ -5,6 +5,7 @@ import Login from './pages/login/Login';
 import About from './pages/about/About';
 import NavBar from './components/navBar/NavBar';
 import Footer from './components/footer/Footer'
+import Cadastro from './pages/cadastro/Cadastro'
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
         <NavBar />
         <div className='flex justify-center min-h-[80vh]'>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={< Cadastro/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/sobre" element={<About />} />
