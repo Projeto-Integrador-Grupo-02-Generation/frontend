@@ -10,6 +10,8 @@ import { AuthProvider } from './contexts/AuthContext';
 import ListaCategorias from './components/categorias/listaCategorias/ListaCategorias';
 import FormularioCategoria from './components/categorias/formularioCategoria/FomularioCategoria';
 import DeletarCategoria from './components/categorias/deletarCategoria/DeletarCategoria';
+import FormularioProduto from './components/produtos/formularioProduto/FormularioProduto';
+import About from './pages/about/About';
 
 
 function App() {
@@ -28,8 +30,9 @@ function App() {
               <Route path="/cadastroCategoria" element={<FormularioCategoria />} />
               <Route path="/editarCategoria/:id" element={<FormularioCategoria />} />
               <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
-
-
+              <Route path="/produtos" element={<FormularioProduto />} />
+              <Route path="/produtos/:id" element={<FormularioProduto />} />
+              <Route path="/sobre" element={<About />} />
             </Routes>
           </div>
           <Footer />
