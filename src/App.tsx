@@ -34,7 +34,7 @@ function App() {
               <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
               <Route path="/produtos" element={< ListaProdutos/>} />
               <Route path="/cadastroProduto" element={<FormularioProduto />} />
-              <Route path="/produtos/:id" element={<FormularioProduto />} />
+              <Route path="/editarProdutos/:id" element={<FormularioProduto />} />  
               <Route path="/deletarProdutos/:id" element={<DeletarProdutos />} />
               <Route path="/sobre" element={<About />} />
             </Routes>

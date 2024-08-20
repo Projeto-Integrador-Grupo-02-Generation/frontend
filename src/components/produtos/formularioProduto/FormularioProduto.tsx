@@ -77,7 +77,7 @@ function FormularioProduto() {
 
     try {
       if (id !== undefined) {
-        await atualizar(`/produtos/`, produto, setProduto, {
+        await atualizar(`/produtos`, produto, setProduto, {
           headers: {
             Authorization: token,
           },
