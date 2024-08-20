@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import ListaProdutos from '../../components/produtos/listaProdutos/listaProdutos';
 
 function Home() {
 
