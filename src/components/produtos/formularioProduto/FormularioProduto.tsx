@@ -7,7 +7,16 @@ import { atualizar, buscar, cadastrar } from '../../../services/Service';
 import { toastAlerta } from '../../../util/toastAlerta';
 
 function FormularioProduto() {
-  const [produto, setProduto] = useState<Produto>({} as Produto);
+  const [produto, setProduto] = useState<Produto>({
+    id: 0,
+    nome: '',
+    descricao: '',
+    preco: 0,
+    estoque: 0,
+    categoria: null,
+    usuario: null
+  });
+
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   let navigate = useNavigate();
@@ -16,7 +25,7 @@ function FormularioProduto() {
   const token = usuario.token;
 
   async function buscarCategorias() {
-    await buscar('/categorias', setCategorias, {
+    await buscar('categorias', setCategorias, {
       headers: {
         Authorization: token,
       },
@@ -24,7 +33,9 @@ function FormularioProduto() {
   }
 
   async function buscarPorId(id: string) {
-    await buscar(`/produtos/${id}`, setProduto, {
+    await buscar(`/produtos/${id}`, (data: Produto) => {
+      setProduto(data);
+    }, {
       headers: {
         Authorization: token,
       },
@@ -40,59 +51,55 @@ function FormularioProduto() {
   }, [id]);
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    setProduto({
-      ...produto,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
 
-    console.log(JSON.stringify(produto));
+    if (name === 'categoria') {
+      const selectedCategoria = categorias.find(categoria => categoria.id === parseInt(value));
+      setProduto(prevProduto => ({
+        ...prevProduto,
+        categoria: selectedCategoria
+      }));
+    } else {
+      setProduto(prevProduto => ({
+        ...prevProduto,
+        [name]: value
+      }));
+    }
   }
 
   async function gerarNovoProduto(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (id !== undefined) {
-      try {
-        await atualizar(`/produtos`, produto, setProduto, {
+    setProduto(prevProduto => ({
+      ...prevProduto,
+      usuario: usuario
+    }));
+
+    try {
+      if (id !== undefined) {
+        await atualizar(`/produtos/`, produto, setProduto, {
           headers: {
             Authorization: token,
           },
         });
-
         toastAlerta('Produto atualizado com sucesso', 'sucesso');
-        retornar();
-
-      } catch (error: any) {
-        if (error.toString().includes('403')) {
-          toastAlerta('O token expirou, favor logar novamente', 'info');
-          handleLogout();
-        } else {
-          toastAlerta('Erro ao atualizar o Produto', 'erro');
-        }
-
-      }
-
-    } else {
-      try {
-        await cadastrar(`/produtos`, produto, setProduto, {
+      } else {
+        await cadastrar('/produtos', produto, setProduto, {
           headers: {
             Authorization: token,
           },
         });
-
         toastAlerta('Produto cadastrado com sucesso', 'sucesso');
-
-      } catch (error: any) {
-        if (error.toString().includes('403')) {
-          toastAlerta('O token expirou, favor logar novamente', 'info');
-          handleLogout();
-        } else {
-          toastAlerta('Erro ao cadastrar o Produto', 'erro');
-        }
+      }
+      retornar();
+    } catch (error: any) {
+      if (error.toString().includes('403')) {
+        toastAlerta('O token expirou, favor logar novamente', 'info');
+        handleLogout();
+      } else {
+        toastAlerta('Erro ao salvar o Produto', 'erro');
       }
     }
-
-    retornar();
   }
 
   function retornar() {
@@ -120,7 +127,7 @@ function FormularioProduto() {
             placeholder="Nome"
             name='nome'
             className="border-2 border-slate-700 rounded p-2"
-            value={produto.nome}
+            value={produto.nome || ''}
             onChange={atualizarEstado}
           />
         </div>
@@ -132,7 +139,7 @@ function FormularioProduto() {
             placeholder="Descrição"
             name='descricao'
             className="border-2 border-slate-700 rounded p-2"
-            value={produto.descricao}
+            value={produto.descricao || ''}
             onChange={atualizarEstado}
           />
         </div>
@@ -144,7 +151,19 @@ function FormularioProduto() {
             placeholder="Preço"
             name='preco'
             className="border-2 border-slate-700 rounded p-2"
-            value={produto.preco}
+            value={produto.preco || ''}
+            onChange={atualizarEstado}
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="estoque">Estoque</label>
+          <input
+            type="number"
+            placeholder="Estoque"
+            name='estoque'
+            className="border-2 border-slate-700 rounded p-2"
+            value={produto.estoque || ''}
             onChange={atualizarEstado}
           />
         </div>
@@ -154,18 +173,13 @@ function FormularioProduto() {
           <select
             name="categoria"
             className="border-2 border-slate-700 rounded p-2"
-            value={produto.categoria?.id}
-            onChange={(e) =>
-              setProduto({
-                ...produto,
-                categoria: categorias.find(categoria => categoria.id === parseInt(e.target.value)),
-              })
-            }
+            value={produto.categoria?.id || ''}
+            onChange={atualizarEstado}
           >
             <option value="">Selecione uma categoria</option>
             {categorias.map(categoria => (
               <option key={categoria.id} value={categoria.id}>
-                {categoria.descricao}
+                {categoria.nome}
               </option>
             ))}
           </select>

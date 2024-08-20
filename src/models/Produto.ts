@@ -7,9 +7,7 @@ export default interface produto {
     nome: string;
     descricao: string;
     preco: number;
-    imagem: string;
-    usuario?: Usuario;
-    categoria?: Categoria
-
-    data: Date;
+    estoque: number;   
+    usuario: Usuario|null;
+    categoria?: Categoria|null;
 }

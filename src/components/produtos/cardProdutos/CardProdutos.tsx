@@ -19,10 +19,6 @@ interface CardProdutosProps {
             <p>{produto.descricao}</p>
             <p>Categoria: {produto.categoria?.descricao}</p>
             <p>Preço: R${produto.preco.toFixed(2)}</p>
-            <p>Data: {new Intl.DateTimeFormat(undefined, {
-              dateStyle: 'full',
-              timeStyle: 'medium',
-            }).format(new Date(produto.data))}</p>
           </div>
         </div>
         <div className="flex">
