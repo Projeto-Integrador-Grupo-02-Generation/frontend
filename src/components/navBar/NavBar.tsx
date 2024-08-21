@@ -18,8 +18,8 @@ function NavBar() {
       <div className='w-full bg-gradient-to-r from-deep-sea to-shallow-sea text-black flex justify-center py-4'>
         <div className="container flex justify-between text-lg">
           <Link to='/home' className='flex items-center text-2xl font-bold uppercase'>
-            <img src={Logo} alt="Kelp Logo" className='h-8 w-8 mr-2' />
-            <span>Kelp</span>
+            <img src={Logo} alt="Kelp Logo" className='w-16' />
+            <p className='font-nico-moji text-algae-green text-5xl mx-5'>Kelp</p>
           </Link>
           
           <div className='flex gap-4'>

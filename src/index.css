@@ -1,3 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: NicoMoji-Regular;
+        src: url(./assets/fonts/NicoMoji-Regular.ttf) format("truetype");
+    }
+}
