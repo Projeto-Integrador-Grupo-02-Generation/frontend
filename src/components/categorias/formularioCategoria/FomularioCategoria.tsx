@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { atualizar, buscar, cadastrar } from '../../../services/Service';
 import Categoria from '../../../models/Categoria';
+import { toastAlerta } from '../../../util/toastAlerta';
 
 function FormularioCategoria() {
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
@@ -46,15 +47,15 @@ function FormularioCategoria() {
                     }
                 })
 
-                alert('Categoria atualizado com sucesso!')
+                toastAlerta('Categoria atualizado com sucesso!','sucesso')
                 retornar()
 
             } catch (error: any) {
                 if (error.toString().includes('403')) {
-                    alert('O token expirou, favor logar novamente.')
+                    toastAlerta('O token expirou, favor logar novamente.','erro')
                     handleLogout()
                 } else {
-                    alert('Erro ao atualizar a Categoria. Tente novamente.')
+                    toastAlerta('Erro ao atualizar a Categoria. Tente novamente.','erro')
                 }
 
             }
@@ -67,14 +68,14 @@ function FormularioCategoria() {
                     }
                 })
 
-                alert('Categoria cadastrada com sucesso')
+                toastAlerta('Categoria cadastrada com sucesso','sucesso')
 
             } catch (error: any) {
                 if (error.toString().includes('403')) {
-                    alert('O token expirou, favor logar novamente.')
+                    toastAlerta('O token expirou, favor logar novamente.','erro')
                     handleLogout()
                 } else {
-                    alert('Erro ao cadastrar a Categoria. Tente novamente.')
+                    toastAlerta('Erro ao cadastrar a Categoria. Tente novamente.','erro')
                 }
             }
         }
@@ -88,7 +89,7 @@ function FormularioCategoria() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado');
+            toastAlerta('Você precisa estar logado.','erro')
             navigate('/login');
         }
     }, [token]);
@@ -109,10 +110,12 @@ function FormularioCategoria() {
                         className="border-2 border-slate-700 rounded p-2"
                         value={categoria.nome}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                        required
+                        minLength={5}
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="descricao">Descrição da categoria</label>
+                    <label htmlFor="descricao">Descrição da categoria </label>
                     <input
                         type="text"
                         placeholder="Descrição"
@@ -120,7 +123,10 @@ function FormularioCategoria() {
                         className="border-2 border-slate-700 rounded p-2"
                         value={categoria.descricao}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                        required
+                        minLength={5}
                     />
+                    
                 </div>
                 <button
                     className="rounded text-slate-100 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto block"
