@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import Logo from '../../assets/logo_kelp.png'
+import { toastAlerta } from '../../util/toastAlerta'
 
 function NavBar() {
   let navigate = useNavigate()
@@ -9,7 +10,7 @@ function NavBar() {
 
   function logout() {
     handleLogout()
-    alert('Usuário deslogado com sucesso')
+    toastAlerta('Usuário deslogado com sucesso','sucesso')
     navigate('/login')
   }
 

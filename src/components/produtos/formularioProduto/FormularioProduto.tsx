@@ -129,6 +129,10 @@ function FormularioProduto() {
             className="border-2 border-slate-700 rounded p-2"
             value={produto.nome || ''}
             onChange={atualizarEstado}
+            required
+            minLength={5}
+            maxLength={100}
+
           />
         </div>
 
@@ -141,18 +145,24 @@ function FormularioProduto() {
             className="border-2 border-slate-700 rounded p-2"
             value={produto.descricao || ''}
             onChange={atualizarEstado}
+            required
+            minLength={5}
+            maxLength={600}
           />
         </div>
 
         <div className="flex flex-col gap-2">
           <label htmlFor="preco">Preço</label>
           <input
-            type="number"
+            type="text"
             placeholder="Preço"
             name='preco'
             className="border-2 border-slate-700 rounded p-2"
             value={produto.preco || ''}
             onChange={atualizarEstado}
+            required
+            pattern="^\d{1,8}(\.\d{1,2})?$"
+            title="O preço deve conter no máximo 8 dígitos inteiros e 2 decimais."
           />
         </div>
 
@@ -165,6 +175,7 @@ function FormularioProduto() {
             className="border-2 border-slate-700 rounded p-2"
             value={produto.estoque || ''}
             onChange={atualizarEstado}
+            required
           />
         </div>
 

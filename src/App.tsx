@@ -14,12 +14,16 @@ import FormularioProduto from './components/produtos/formularioProduto/Formulari
 import ListaProdutos from './components/produtos/listaProdutos/listaProdutos';
 import About from './pages/about/About';
 import DeletarProdutos from './components/produtos/deletarProdutos/deletarProduto';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 
 function App() {
   return (
     <>
       <AuthProvider>
+      <ToastContainer />
         <BrowserRouter>
           <Navbar />
           <div className='min-h-[80vh]'>
