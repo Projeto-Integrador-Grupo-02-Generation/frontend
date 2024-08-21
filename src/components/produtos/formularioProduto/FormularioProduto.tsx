@@ -108,7 +108,7 @@ function FormularioProduto() {
 
   useEffect(() => {
     if (token === '') {
-      toastAlerta('Você precisa estar logado', 'info');
+      toastAlerta('Você precisa estar logado', 'erro');
       navigate('/login');
     }
   }, [token]);

@@ -45,13 +45,14 @@ function Login() {
           <div className="flex flex-col mb-4">
             <label htmlFor="usuario" className="mb-2 text-lg font-medium">Usuário</label>
             <input
-              type="text"
+              type="email"
               id="usuario"
               name="usuario"
               placeholder="ex: usuario@usuario.com"
               className="border-2 border-slate-700 rounded-lg p-3 text-lg focus:outline-none focus:border-green-600"
               value={usuarioLogin.usuario} 
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              required
             />
           </div>
           <div className="flex flex-col mb-6">
@@ -64,6 +65,10 @@ function Login() {
               className="border-2 border-slate-700 rounded-lg p-3 text-lg focus:outline-none focus:border-green-600"
               value={usuarioLogin.senha} 
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              required
+              pattern=".{8,}"
+              title="A senha deve ter pelo menos 8 caracteres."
+              
             />
           </div>
           <button 

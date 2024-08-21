@@ -84,18 +84,22 @@ function Cadastro() {
               className="border-2 border-slate-700 rounded p-2"
               value={usuario.nome} 
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              required
+              minLength={3}
+              maxLength={100}
             />
           </div>
           <div className="flex flex-col w-full">
             <label htmlFor="usuario">Usuario</label>
             <input
-              type="text"
+              type="email"
               id="usuario"
               name="usuario"
               placeholder="Usuario"
               className="border-2 border-slate-700 rounded p-2"
               value={usuario.usuario} 
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              required
             />
           </div>
           <div className="flex flex-col w-full">
@@ -120,6 +124,9 @@ function Cadastro() {
               className="border-2 border-slate-700 rounded p-2"
               value={usuario.senha} 
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              required
+              pattern=".{8,}"
+              title="A senha deve ter pelo menos 8 caracteres."
             />
           </div>
           <div className="flex flex-col w-full">
@@ -132,6 +139,9 @@ function Cadastro() {
               className="border-2 border-slate-700 rounded p-2"
               value={confirmaSenha}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleConfirmarSenha(e)}
+              required
+              pattern=".{8,}"
+              title="A senha deve ter pelo menos 8 caracteres."
             />
           </div>
           <div className="flex justify-around w-full gap-8">
