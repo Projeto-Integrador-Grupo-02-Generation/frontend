@@ -9,6 +9,7 @@ interface AuthContextProps {
     handleLogout(): void
     handleLogin(usuario: UsuarioLogin): Promise<void>
     isLoading: boolean
+    isAuthenticated: boolean
 }
 
 interface AuthProviderProps {
@@ -29,6 +30,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     })
 
     const [isLoading, setIsLoading] = useState(false)
+
+    const isAuthenticated = usuario.token !== "" 
 
     async function handleLogin(userLogin: UsuarioLogin) {
         setIsLoading(true)
@@ -56,7 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
+        <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading, isAuthenticated }}>
             {children}
         </AuthContext.Provider>
     )
