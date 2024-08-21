@@ -10,3 +10,8 @@
         src: url(./assets/fonts/NicoMoji-Regular.ttf) format("truetype");
     }
 }
+@layer base {
+    html {
+      @apply font-inter;
+    }
+}
