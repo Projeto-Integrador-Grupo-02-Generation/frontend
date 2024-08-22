@@ -108,85 +108,97 @@ function FormularioProduto() {
 
   useEffect(() => {
     if (token === '') {
-      toastAlerta('Você precisa estar logado', 'info');
+      toastAlerta('Você precisa estar logado', 'erro');
       navigate('/login');
     }
   }, [token]);
 
   return (
-    <div className="container flex flex-col items-center justify-center mx-auto">
-      <h1 className="text-4xl text-center my-8">
+    <div className="container flex flex-col items-center justify-center mx-auto p-6">
+      <h1 className="text-4xl font-bold text-gray-800 mb-8">
         {id === undefined ? 'Cadastre um novo produto' : 'Editar produto'}
       </h1>
 
-      <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovoProduto}>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="nome">Nome do Produto</label>
-          <input
-            type="text"
-            placeholder="Nome"
-            name='nome'
-            className="border-2 border-slate-700 rounded p-2"
-            value={produto.nome || ''}
-            onChange={atualizarEstado}
-          />
-        </div>
+      <form className="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg" onSubmit={gerarNovoProduto}>
+        <div className="flex flex-col gap-4 mb-4">
+          <div className="flex flex-col">
+            <label htmlFor="nome" className="text-gray-700 font-semibold mb-1">Nome do Produto</label>
+            <input
+              type="text"
+              placeholder="Nome"
+              name='nome'
+              className="border-2 border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              value={produto.nome || ''}
+              onChange={atualizarEstado}
+              required
+              minLength={5}
+              maxLength={100}
+            />
+          </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="descricao">Descrição do Produto</label>
-          <input
-            type="text"
-            placeholder="Descrição"
-            name='descricao'
-            className="border-2 border-slate-700 rounded p-2"
-            value={produto.descricao || ''}
-            onChange={atualizarEstado}
-          />
-        </div>
+          <div className="flex flex-col">
+            <label htmlFor="descricao" className="text-gray-700 font-semibold mb-1">Descrição do Produto</label>
+            <input
+              type="text"
+              placeholder="Descrição"
+              name='descricao'
+              className="border-2 border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              value={produto.descricao || ''}
+              onChange={atualizarEstado}
+              required
+              minLength={5}
+              maxLength={600}
+            />
+          </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="preco">Preço</label>
-          <input
-            type="number"
-            placeholder="Preço"
-            name='preco'
-            className="border-2 border-slate-700 rounded p-2"
-            value={produto.preco || ''}
-            onChange={atualizarEstado}
-          />
-        </div>
+          <div className="flex flex-col">
+            <label htmlFor="preco" className="text-gray-700 font-semibold mb-1">Preço</label>
+            <input
+              type="text"
+              placeholder="Preço"
+              name='preco'
+              className="border-2 border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              value={produto.preco || ''}
+              onChange={atualizarEstado}
+              required
+              pattern="^\d{1,8}(\.\d{1,2})?$"
+              title="O preço deve conter no máximo 8 dígitos inteiros e 2 decimais."
+            />
+          </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="estoque">Estoque</label>
-          <input
-            type="number"
-            placeholder="Estoque"
-            name='estoque'
-            className="border-2 border-slate-700 rounded p-2"
-            value={produto.estoque || ''}
-            onChange={atualizarEstado}
-          />
-        </div>
+          <div className="flex flex-col">
+            <label htmlFor="estoque" className="text-gray-700 font-semibold mb-1">Estoque</label>
+            <input
+              type="number"
+              placeholder="Estoque"
+              name='estoque'
+              className="border-2 border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              value={produto.estoque || ''}
+              onChange={atualizarEstado}
+              required
+            />
+          </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="categoria">Categoria</label>
-          <select
-            name="categoria"
-            className="border-2 border-slate-700 rounded p-2"
-            value={produto.categoria?.id || ''}
-            onChange={atualizarEstado}
-          >
-            <option value="">Selecione uma categoria</option>
-            {categorias.map(categoria => (
-              <option key={categoria.id} value={categoria.id}>
-                {categoria.nome}
-              </option>
-            ))}
-          </select>
+          <div className="flex flex-col">
+            <label htmlFor="categoria" className="text-gray-700 font-semibold mb-1">Categoria</label>
+            <select
+              name="categoria"
+              className="border-2 border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              value={produto.categoria?.id || ''}
+              onChange={atualizarEstado}
+            >
+              <option value="">Selecione uma categoria</option>
+              {categorias.map(categoria => (
+                <option key={categoria.id} value={categoria.id}>
+                  {categoria.nome}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <button
-          className="rounded text-slate-100 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto block"
+          className="w-full py-3 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 transition-colors"
           type="submit"
         >
           {id === undefined ? 'Cadastrar' : 'Editar'}

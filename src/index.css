@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply bg-blue-100;
+  }
+
 @layer base {
     @font-face {
         font-family: NicoMoji-Regular;

@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import Logo from '../../assets/logo_kelp.png'
+import { toastAlerta } from '../../util/toastAlerta'
 
 function NavBar() {
   let navigate = useNavigate()
@@ -9,7 +10,7 @@ function NavBar() {
 
   function logout() {
     handleLogout()
-    alert('Usuário deslogado com sucesso')
+    toastAlerta('Usuário deslogado com sucesso','sucesso')
     navigate('/login')
   }
 
@@ -23,22 +24,22 @@ function NavBar() {
           </Link>
           
           <div className='flex gap-4'>
-            <Link to='/categorias' className='hover:text-sky-200 text-white hover:border-b-2 border-sky-200 transition-all duration-300'>
+            <Link to='/categorias' className='hover:text-sky-200 text-white no-underline transition-all duration-300'>
               Categorias
             </Link>
-            <Link to="/produtos" className='hover:text-sky-200 text-white hover:border-b-2 border-sky-200 transition-all duration-300'>
+            <Link to="/produtos" className='hover:text-sky-200 text-white no-underline transition-all duration-300'>
               Produtos
             </Link>
-            <Link to='/sobre' className='hover:text-sky-200 text-white hover:border-b-2 border-sky-200 transition-all duration-300'>
+            <Link to='/sobre' className='hover:text-sky-200 text-white no-underline transition-all duration-300'>
               Sobre
             </Link>
             {!isAuthenticated && (
-              <Link to='/login' className='hover:text-sky-200 text-white hover:border-b-2 border-sky-200 transition-all duration-300'>
+              <Link to='/login' className='hover:text-sky-200 text-white no-underline transition-all duration-300'>
                 Login
               </Link>
             )}
             {isAuthenticated && (
-              <Link to='' onClick={logout} className='hover:text-sky-200 text-white hover:border-b-2 border-sky-200 transition-all duration-300'>
+              <Link to='' onClick={logout} className='hover:text-sky-200 text-white no-underline transition-all duration-300'>
                 Sair
               </Link>
             )}
