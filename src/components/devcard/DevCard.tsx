@@ -10,7 +10,7 @@ interface DevCardProps {
 function DevCard(props: DevCardProps) {
     return (
         <>
-            <div className='bg-green-200 shadow-md
+            <div className='bg-white shadow-md shadow-emphasis-blue
             flex flex-col 
             text-center text-wrap
             items-center max-w-96 m-5 rounded-2xl'>
