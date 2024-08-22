@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,3 +7,15 @@
 body {
     @apply bg-blue-100;
   }
+
+@layer base {
+    @font-face {
+        font-family: NicoMoji-Regular;
+        src: url(./assets/fonts/NicoMoji-Regular.ttf) format("truetype");
+    }
+}
+@layer base {
+    html {
+      @apply font-inter;
+    }
+}
