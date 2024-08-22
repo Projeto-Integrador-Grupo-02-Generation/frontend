@@ -1,36 +1,42 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import produto from "../../../models/Produto";
-
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 interface CardProdutosProps {
     produto: produto;
-  }
-  
-  function CardProdutos({ produto }: CardProdutosProps) {
+}
+
+function CardProdutos({ produto }: CardProdutosProps) {
     return (
-      <div className='border-slate-900 border flex flex-col rounded overflow-hidden justify-between'>
-        <div>
-          <div className="flex w-full bg-indigo-400 py-2 px-4 items-center gap-4">
-            <img src={produto.usuario?.foto} className='h-12 rounded-full' alt={`Foto de ${produto.usuario?.nome}`} />
-            <h3 className='text-lg font-bold text-center uppercase '>{produto.usuario?.nome}</h3>
-          </div>
-          <div className='p-4 '>
-            <h4 className='text-lg font-semibold uppercase'>{produto.nome}</h4>
-            <p>{produto.descricao}</p>
-            <p>Categoria: {produto.categoria?.descricao}</p>
-            <p>Preço: R${produto.preco.toFixed(2)}</p>
-          </div>
+        <div className='border border-slate-300 shadow-lg rounded-lg overflow-hidden flex flex-col'>
+            <div className="bg-gradient-to-r from-deep-sea to-shallow-sea text-white p-4 flex items-center">
+                <img src={produto.usuario?.foto} className='h-16 w-16 rounded-full border-2 border-white' alt={`Foto de ${produto.usuario?.nome}`} />
+                <h3 className='ml-4 text-xl font-semibold'>{produto.usuario?.nome}</h3>
+            </div>
+            <div className='p-6 bg-slate-100'>
+                <h4 className='text-xl font-bold mb-2'>{produto.nome}</h4>
+                <p className='text-gray-700 mb-4'>{produto.descricao}</p>
+                <p className='text-gray-600 mb-2'> <span className='font-semibold'>{produto.categoria?.descricao}</span></p>
+                <p className='text-gray-900 font-bold'>Preço: R${produto.preco.toFixed(2)}</p>
+            </div>
+            <div className="flex justify-between bg-slate-200 border-t border-slate-300">
+                <Link
+                    to={`/editarprodutos/${produto.id}`}
+                    className='flex-1 text-slate-100 bg-blue-500 hover:bg-blue-700 flex items-center justify-center py-2 px-4 font-semibold rounded-l-lg transition-colors'
+                >
+                    <FaEdit className='mr-2' />
+                    
+                </Link>
+                <Link
+                    to={`/deletarProdutos/${produto.id}`}
+                    className='flex-1 text-slate-100 bg-red-500 hover:bg-red-700 flex items-center justify-center py-2 px-4 font-semibold rounded-r-lg transition-colors'
+                >
+                    <FaTrash className='mr-2' />
+                    
+                </Link>
+            </div>
         </div>
-        <div className="flex">
-          <Link to={`/editarprodutos/${produto.id}`} className='w-full text-white bg-indigo-400 hover:bg-indigo-800 flex items-center justify-center py-2'>
-            <button>Editar</button>
-          </Link>
-          <Link to={`/deletarProdutos/${produto.id}`} className='text-white bg-red-400 hover:bg-red-700 w-full flex items-center justify-center'>
-            <button>Deletar</button>
-          </Link>
-        </div>
-      </div>
     );
-  }
-  
-  export default CardProdutos;
+}
+
+export default CardProdutos;

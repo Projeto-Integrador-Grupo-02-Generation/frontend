@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Usuario from '../../models/Usuario'
 import { cadastrarUsuario } from '../../services/Service'
 import './Cadastro.css'
+import { toastAlerta } from '../../util/toastAlerta'
 
 function Cadastro() {
 
@@ -54,14 +55,14 @@ function Cadastro() {
 
       try {
         await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuarioResposta)
-        alert('Usuário cadastrado com sucesso')
+        toastAlerta('Usuário cadastrado com sucesso','sucesso')
 
       } catch (error) {
-        alert('Erro ao cadastrar o Usuário')
+        toastAlerta('Erro ao cadastrar o Usuário','erro')
       }
 
     } else {
-      alert('Dados inconsistentes. Verifique as informações de cadastro.')
+      toastAlerta('Dados inconsistentes. Verifique as informações de cadastro.','erro')
       setUsuario({ ...usuario, senha: "" }) // Reinicia o campo de Senha
       setConfirmaSenha("")                  // Reinicia o campo de Confirmar Senha
     }
@@ -83,18 +84,22 @@ function Cadastro() {
               className="border-2 border-slate-700 rounded p-2"
               value={usuario.nome} 
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              required
+              minLength={3}
+              maxLength={100}
             />
           </div>
           <div className="flex flex-col w-full">
             <label htmlFor="usuario">Usuario</label>
             <input
-              type="text"
+              type="email"
               id="usuario"
               name="usuario"
               placeholder="Usuario"
               className="border-2 border-slate-700 rounded p-2"
               value={usuario.usuario} 
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              required
             />
           </div>
           <div className="flex flex-col w-full">
@@ -119,6 +124,9 @@ function Cadastro() {
               className="border-2 border-slate-700 rounded p-2"
               value={usuario.senha} 
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              required
+              pattern=".{8,}"
+              title="A senha deve ter pelo menos 8 caracteres."
             />
           </div>
           <div className="flex flex-col w-full">
@@ -131,6 +139,9 @@ function Cadastro() {
               className="border-2 border-slate-700 rounded p-2"
               value={confirmaSenha}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleConfirmarSenha(e)}
+              required
+              pattern=".{8,}"
+              title="A senha deve ter pelo menos 8 caracteres."
             />
           </div>
           <div className="flex justify-around w-full gap-8">
