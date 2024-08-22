@@ -7,11 +7,8 @@ import { toastAlerta } from '../../../util/toastAlerta';
 
 function FormularioCategoria() {
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
-
-    let navigate = useNavigate();
-
+    const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
-
     const { usuario, handleLogout } = useContext(AuthContext);
     const token = usuario.token;
 
@@ -25,19 +22,19 @@ function FormularioCategoria() {
 
     useEffect(() => {
         if (id !== undefined) {
-            buscarPorId(id)
+            buscarPorId(id);
         }
-    }, [id])
+    }, [id]);
 
     function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
         setCategoria({
             ...categoria,
             [e.target.name]: e.target.value
-        })
+        });
     }
 
     async function gerarNovaCategoria(e: ChangeEvent<HTMLFormElement>) {
-        e.preventDefault()
+        e.preventDefault();
 
         if (id !== undefined) {
             try {
@@ -45,19 +42,18 @@ function FormularioCategoria() {
                     headers: {
                         'Authorization': token
                     }
-                })
+                });
 
-                toastAlerta('Categoria atualizado com sucesso!','sucesso')
-                retornar()
+                toastAlerta('Categoria atualizada com sucesso!', 'sucesso');
+                retornar();
 
             } catch (error: any) {
                 if (error.toString().includes('403')) {
-                    toastAlerta('O token expirou, favor logar novamente.','erro')
-                    handleLogout()
+                    toastAlerta('O token expirou, favor logar novamente.', 'erro');
+                    handleLogout();
                 } else {
-                    toastAlerta('Erro ao atualizar a Categoria. Tente novamente.','erro')
+                    toastAlerta('Erro ao atualizar a Categoria. Tente novamente.', 'erro');
                 }
-
             }
 
         } else {
@@ -66,48 +62,47 @@ function FormularioCategoria() {
                     headers: {
                         'Authorization': token
                     }
-                })
+                });
 
-                toastAlerta('Categoria cadastrada com sucesso','sucesso')
+                toastAlerta('Categoria cadastrada com sucesso', 'sucesso');
+                retornar();
 
             } catch (error: any) {
                 if (error.toString().includes('403')) {
-                    toastAlerta('O token expirou, favor logar novamente.','erro')
-                    handleLogout()
+                    toastAlerta('O token expirou, favor logar novamente.', 'erro');
+                    handleLogout();
                 } else {
-                    toastAlerta('Erro ao cadastrar a Categoria. Tente novamente.','erro')
+                    toastAlerta('Erro ao cadastrar a Categoria. Tente novamente.', 'erro');
                 }
             }
         }
-
-        retornar()
     }
 
     function retornar() {
-        navigate("/categorias")
+        navigate("/categorias");
     }
 
     useEffect(() => {
         if (token === '') {
-            toastAlerta('Você precisa estar logado.','erro')
+            toastAlerta('Você precisa estar logado.', 'erro');
             navigate('/login');
         }
     }, [token]);
 
     return (
-        <div className="container flex flex-col items-center justify-center mx-auto">
-            <h1 className="text-4xl text-center my-8">
-                {id === undefined ? 'Cadastrar nova categoria' : 'Editar categoria'}
+        <div className="container mx-auto px-4 py-8 flex flex-col items-center">
+            <h1 className="text-4xl text-center mb-8 font-bold text-gray-700  from-deep-sea to-shallow-sea bg-clip-text ">
+                {id === undefined ? 'Cadastre uma nova categoria' : 'Editar categoria'}
             </h1>
 
-            <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovaCategoria}>
+            <form className="w-full max-w-md flex flex-col gap-4" onSubmit={gerarNovaCategoria}>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="nome">Nome da categoria</label>
+                    <label htmlFor="nome" className="text-gray-700 font-semibold mb-1">Nome da categoria</label>
                     <input
                         type="text"
                         placeholder="Nome"
                         name='nome'
-                        className="border-2 border-slate-700 rounded p-2"
+                        className="border-2 border-slate-700 rounded p-2 bg-slate-100 focus:outline-none focus:border-indigo-500 transition duration-300"
                         value={categoria.nome}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         required
@@ -115,21 +110,20 @@ function FormularioCategoria() {
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="descricao">Descrição da categoria </label>
+                    <label htmlFor="descricao" className="text-gray-700 font-semibold mb-1">Descrição da categoria</label>
                     <input
                         type="text"
                         placeholder="Descrição"
                         name='descricao'
-                        className="border-2 border-slate-700 rounded p-2"
+                        className="border-2 border-slate-700 rounded p-2 bg-slate-100 focus:outline-none focus:border-indigo-500 transition duration-300"
                         value={categoria.descricao}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         required
                         minLength={5}
                     />
-                    
                 </div>
                 <button
-                    className="rounded text-slate-100 bg-indigo-400 hover:bg-indigo-800 w-1/2 py-2 mx-auto block"
+                    className="bg-gradient-to-r from-deep-sea to-shallow-sea text-white font-bold py-2 px-4 rounded transition-all duration-300 hover:from-shallow-sea hover:to-deep-sea w-1/2 mx-auto"
                     type="submit"
                 >
                     {id === undefined ? 'Cadastrar' : 'Editar'}
