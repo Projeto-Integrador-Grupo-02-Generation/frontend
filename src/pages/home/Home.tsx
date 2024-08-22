@@ -1,9 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import ListaProdutos from '../../components/produtos/listaProdutos/listaProdutos';
-
 function Home() {
-
-    let navigate = useNavigate();
 
     return (
         <div className="flex justify-center min-h-full">
