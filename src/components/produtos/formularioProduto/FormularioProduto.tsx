@@ -25,7 +25,7 @@ function FormularioProduto() {
   const token = usuario.token;
 
   async function buscarCategorias() {
-    await buscar('categorias', setCategorias, {
+    await buscar('/categorias', setCategorias, {
       headers: {
         Authorization: token,
       },
@@ -57,12 +57,12 @@ function FormularioProduto() {
       const selectedCategoria = categorias.find(categoria => categoria.id === parseInt(value));
       setProduto(prevProduto => ({
         ...prevProduto,
-        categoria: selectedCategoria
+        categoria: selectedCategoria || null
       }));
     } else {
       setProduto(prevProduto => ({
         ...prevProduto,
-        [name]: value
+        [name]: name === 'preco' ? parseFloat(value) : value
       }));
     }
   }
@@ -70,21 +70,24 @@ function FormularioProduto() {
   async function gerarNovoProduto(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    setProduto(prevProduto => ({
-      ...prevProduto,
-      usuario: usuario
-    }));
+    
+    const produtoComUsuario = {
+      ...produto,
+      usuario: usuario 
+    };
 
     try {
       if (id !== undefined) {
-        await atualizar(`/produtos`, produto, setProduto, {
+        
+        await atualizar(`/produtos/${id}`, produtoComUsuario, setProduto, {
           headers: {
             Authorization: token,
           },
         });
         toastAlerta('Produto atualizado com sucesso', 'sucesso');
       } else {
-        await cadastrar('/produtos', produto, setProduto, {
+        
+        await cadastrar('/produtos', produtoComUsuario, setProduto, {
           headers: {
             Authorization: token,
           },
@@ -198,7 +201,7 @@ function FormularioProduto() {
         </div>
 
         <button
-          className="w-full py-3 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 transition-colors"
+          className="flex justify-center items-center bg-gradient-to-r from-deep-sea to-shallow-sea text-white font-bold py-2 px-4 rounded transition-all duration-300 hover:from-shallow-sea hover:to-deep-sea w-1/2 mx-auto text-center"
           type="submit"
         >
           {id === undefined ? 'Cadastrar' : 'Editar'}
