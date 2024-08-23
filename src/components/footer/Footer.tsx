@@ -6,10 +6,10 @@ function Footer() {
     <>
       <div className="flex justify-center bg-gradient-to-r from-deep-sea to-shallow-sea text-white">
         <div className="container flex flex-col items-center py-4">
-          <p className="text-xl font-bold">KELP | Copyright: </p>
-          <p className="text-lg">Acesse nossas redes sociais</p>
+          <p className="text-xl font-bold">KELP | Copyright © 2024 </p>
+          <p className="text-lg">Acesse nossas redes sociais:</p>
           <div className="flex gap-4">
-            <a href="" target="_blank" rel="noopener noreferrer" className="hover:opacity-75 transition-opacity duration-300">
+            <a href="https://github.com/orgs/Projeto-Integrador-Grupo-02-Generation/repositories" target="_blank" rel="noopener noreferrer" className="hover:opacity-75 transition-opacity duration-300">
               <img src={LogoGit} alt="GitHub Logo" className="w-8 h-8" />
             </a>
             <a href="" target="_blank" rel="noopener noreferrer" className="hover:opacity-75 transition-opacity duration-300">

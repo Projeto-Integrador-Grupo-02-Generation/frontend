@@ -6,9 +6,9 @@ function Home() {
 
     return (
         <div className="flex justify-center min-h-full">
-            <div className='container grid grid-cols-1 text-black'>
-                <div className="flex flex-col gap-4 items-center justify-center py-4">
-                    <h2 className='text-5xl font-bold'>Seja bem vinde!</h2>
+            <div className="px-16 py-5 text-justify text-wrap min-w-96 max-w-screen-2xl mx-auto">
+                <div className="flex flex-col items-center justify-center py-5">
+                    <h2 className='text-5xl font-bold py-10'>Seja bem vinde!</h2>
 
                     <ListaProdutos showAddButton={false} />
                 </div>

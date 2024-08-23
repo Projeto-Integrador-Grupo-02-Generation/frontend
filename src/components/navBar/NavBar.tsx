@@ -23,7 +23,7 @@ function NavBar() {
             <p className='font-nico-moji text-algae-green text-5xl mx-5'>Kelp</p>
           </Link>
           
-          <div className='flex gap-4'>
+          <div className='flex gap-4 items-center'>
             <Link to='/categorias' className='hover:text-sky-200 text-white no-underline transition-all duration-300'>
               Categorias
             </Link>
