@@ -67,7 +67,7 @@ function DeletarCategoria() {
             </h1>
 
             <p className="text-lg text-gray-600 mb-6 text-center">
-                Você tem certeza de que deseja apagar a categoria a seguir?
+                Ao apagar esta categoria, todos os produtos associados a ela também serão apagados. Tem certeza que quer apagá-la?
             </p>
 
             <div className="w-full max-w-md bg-white border rounded-lg shadow-lg overflow-hidden">
