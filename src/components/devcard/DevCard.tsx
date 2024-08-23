@@ -1,6 +1,6 @@
 import LogoLinkedin from '../../assets/linkedin_icon.png'
 import LogoGithub from '../../assets/github_icon.png'
-import LogoWhatsapp from '../../assets/github_icon.png'
+import LogoWhatsapp from '../../assets/whatsapp_icon.png'
 
 interface DevCardProps {
     image: string
